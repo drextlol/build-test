@@ -27,8 +27,4 @@ jobs:
         api_key: "$NPM_API_KEY"
         on:
           tags: true
-
-branches:
-  only:
-    - master
-    - /^v[0-9]+.*$/
+          branch: master
