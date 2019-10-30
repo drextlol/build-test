@@ -10,6 +10,7 @@ jobs:
   include:
   # --------------------------------------------
     - stage: Build Application
+      skip_cleanup: true
       before_script:
         - npm install
       script:
@@ -17,14 +18,13 @@ jobs:
       on:
         branch: master
   # --------------------------------------------
-    - stage: Release version to NPM
+    - stage: Release to NPM
       before_deploy:
         - cd build
       deploy:
-        skip_cleanup: true
         provider: npm
         email: "$EMAIL"
         api_key: "$NPM_API_KEY"
+        skip_cleanup: true
         on:
-          tags: true
           branch: master
