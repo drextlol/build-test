@@ -18,6 +18,8 @@ jobs:
         branch: master
   # --------------------------------------------
     - stage: Release version to NPM
+      before_deploy:
+        - cd build
       deploy:
         skip_cleanup: true
         provider: npm
