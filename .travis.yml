@@ -1,25 +1,25 @@
 language: node_js
 node_js:
-  - "stable"
-
+- stable
 cache:
   directories:
-    - node_modules
-
+  - node_modules
 jobs:
   include:
-  # --------------------------------------------
-    - stage: Build
-      script:
-        - npm install
-        - npm run build
-      before_deploy:
-        - cd build/
-      deploy:
-        skip_cleanup: true
-        keep-history: true
-        provider: npm
-        email: "$EMAIL"
-        api_key: "$NPM_API_KEY"
-        on:
-          branch: master
+  - stage: Build
+    script:
+    - npm install
+    - npm run build
+    before_deploy:
+    - cd build/
+    deploy:
+      skip_cleanup: true
+      keep-history: true
+      provider: npm
+      email: "$EMAIL"
+      api_key:
+        secure: $NPM_API_KEY
+      on:
+        branch: master
+        repo: drextlol/build-test
+    
