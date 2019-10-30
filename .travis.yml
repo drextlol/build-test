@@ -1,0 +1,32 @@
+language: node_js
+node_js:
+  - "stable"
+
+cache:
+  directories:
+    - node_modules
+
+jobs:
+  include:
+  # --------------------------------------------
+    - stage: Build Application
+      before_script:
+        - npm install
+      script:
+        - npm run build
+      on:
+        branch: master
+  # --------------------------------------------
+    - stage: Release version to NPM
+      deploy:
+        skip_cleanup: true
+        provider: npm
+        email: "$EMAIL"
+        api_key: "$NPM_API_KEY"
+        on:
+          tags: true
+
+branches:
+  only:
+    - master
+    - /^v[0-9]+.*$/
