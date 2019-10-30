@@ -9,22 +9,17 @@ cache:
 jobs:
   include:
   # --------------------------------------------
-    - stage: Build Application
-      skip_cleanup: true
-      before_script:
-        - npm install
+    - stage: Build
       script:
+        - npm install
         - npm run build
-      on:
-        branch: master
-  # --------------------------------------------
-    - stage: Release to NPM
       before_deploy:
-        - cd build
+        - cd build/
       deploy:
+        skip_cleanup: true
+        keep-history: true
         provider: npm
         email: "$EMAIL"
         api_key: "$NPM_API_KEY"
-        skip_cleanup: true
         on:
           branch: master
